@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_genuine_check_user,genuine.check.user,model_genuine_check,stock.group_stock_user,1,1,1,0
+access_genuine_check_manager,genuine.check.manager,model_genuine_check,stock.group_stock_manager,1,1,1,1
+access_generate_serials_wizard_user,generate.serials.wizard.user,model_generate_serials_wizard,stock.group_stock_user,1,1,1,0

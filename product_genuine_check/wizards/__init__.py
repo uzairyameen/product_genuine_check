@@ -1,0 +1,1 @@
+from . import generate_serials_wizard

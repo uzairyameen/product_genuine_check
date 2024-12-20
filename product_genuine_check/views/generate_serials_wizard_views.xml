@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_generate_serials_wizard_form" model="ir.ui.view">
+        <field name="name">generate.serials.wizard.form</field>
+        <field name="model">generate.serials.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date"/>
+                    <field name="product_id"/>
+                    <field name="amount"/>
+                </group>
+                <footer>
+                    <button string="Generate" name="generate_serials" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_generate_serials_wizard" model="ir.actions.act_window">
+        <field name="name">Generate Serial Numbers</field>
+        <field name="res_model">generate.serials.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

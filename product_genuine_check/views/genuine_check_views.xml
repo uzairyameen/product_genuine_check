@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree/List View -->
+    <record id="view_genuine_check_tree" model="ir.ui.view">
+        <field name="name">genuine.check.tree</field>
+        <field name="model">genuine.check</field>
+        <field name="arch" type="xml">
+            <tree>
+                <control>
+                    <create string="New"/>
+                    <button string="Generate Serials" name="%(action_generate_serials_wizard)d" type="action" class="btn-primary"/>
+                </control>
+                <field name="serial"/>
+                <field name="product_id"/>
+                <field name="consumed"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_genuine_check_form" model="ir.ui.view">
+        <field name="name">genuine.check.form</field>
+        <field name="model">genuine.check</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="serial"/>
+                            <field name="product_id"/>
+                            <field name="generation_date"/>
+                            <field name="production_date"/>
+                            <field name="consumed"/>
+                        </group>
+                        <group>
+                            <field name="consumption_date" invisible="not consumed"/>
+                            <field name="consumption_city" invisible="not consumed"/>
+                            <field name="consumption_longitude" invisible="not consumed"/>
+                            <field name="consumption_latitude" invisible="not consumed"/>
+                            <field name="customer_id" invisible="not consumed"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_genuine_check_search" model="ir.ui.view">
+        <field name="name">genuine.check.search</field>
+        <field name="model">genuine.check</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="serial"/>
+                <field name="product_id"/>
+                <field name="customer_id"/>
+                <separator/>
+                <filter string="Consumed" name="consumed" domain="[('consumed', '=', True)]"/>
+                <filter string="Not Consumed" name="not_consumed" domain="[('consumed', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Product" name="group_by_product" context="{'group_by': 'product_id'}"/>
+                    <filter string="Generation Date" name="group_by_generation_date" context="{'group_by': 'generation_date'}"/>
+                    <filter string="Customer" name="group_by_customer" context="{'group_by': 'customer_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_genuine_check" model="ir.actions.act_window">
+        <field name="name">Genuine Check</field>
+        <field name="res_model">genuine.check</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_genuine_check_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No genuine check records found
+            </p>
+            <p>
+                Click on Generate Serials to create new genuine check records.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_genuine_check"
+              name="Genuine Check"
+              parent="stock.menu_stock_inventory_control"
+              action="action_genuine_check"
+              sequence="100"
+              groups="stock.group_stock_manager"/>
+
+</odoo>
